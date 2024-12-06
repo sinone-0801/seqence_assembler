@@ -830,7 +830,7 @@
             files = event.target.files
             await process_files(files)
 
-        def handle_drop(event):
+        async def handle_drop(event):
             event.preventDefault()
             event.stopPropagation()
             files = event.dataTransfer.files
