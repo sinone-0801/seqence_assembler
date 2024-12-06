@@ -40,6 +40,8 @@
             margin: 10px 0;
         }
         #dropZone {
+            position:relative;
+            pointer-events:auto;
             border: 2px dashed #ccc;
             border-radius: 4px;
             padding: 20px;
@@ -831,6 +833,20 @@
             await process_files(files)
 
         async def handle_drop(event):
+            console.log("drop event triggered")
+            try:
+                dt = event.dataTransfer
+                console.log("dataTransfer:", dt)
+                files = dt.files
+                console.log("files:", files)
+                # filesがPyProxyの場合はlen(files)で長さが取れるか試す
+                console.log("len(files):", len(files))
+                console.log("Types:", event.dataTransfer.types)
+                console.log("Items:", event.dataTransfer.items)
+
+            except Exception as e:
+                console.log("Exception occurred:", str(e))
+                            
             event.preventDefault()
             event.stopPropagation()
             files = event.dataTransfer.files
